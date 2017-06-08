@@ -11,46 +11,44 @@ import android.widget.Toast;
 public class LogIn extends AppCompatActivity {
     DataBase helper=new DataBase(this);
 
-     Button login,signup;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+    }
 
-        login=(Button) findViewById(R.id.login_loginbtn);
-        signup=(Button) findViewById(R.id.login_signupbtn);
+    public void signIn(View v) {
 
+        if (v.getId() == R.id.login_loginbtn) {
+            EditText a = (EditText) findViewById(R.id.log_in_usrname);
+            EditText b = (EditText) findViewById(R.id.log_in_pass);
 
+            String str = a.getText().toString();
+            String pass = b.getText().toString();
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               EditText a=(EditText) findViewById(R.id.log_in_usrname);
-                EditText b=(EditText) findViewById(R.id.log_in_pass);
+            if (str.length()>0 && pass.length()>0) {
 
-
-                String str=a.getText().toString();
-                String pass=b.getText().toString();
-
-                String password =helper.searchPass(str);
-                if (pass.equals(password)){
-                Intent intent=new Intent(LogIn.this,Welcome.class);
-                startActivity(intent);
+                String password = helper.searchPass(str);
+                if (pass.equals(password)) {
+                    Intent intent = new Intent(LogIn.this, Welcome.class);
+                    startActivity(intent);
+                } else {
+                    Toast temp = Toast.makeText(LogIn.this, "invalid username/password", Toast.LENGTH_SHORT);
+                    temp.show();
+                }
             }
             else{
-                Toast temp=Toast.makeText(LogIn.this,"invalid username/password",Toast.LENGTH_SHORT);
-                temp.show();
-            }}
-        });
-
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LogIn.this,SignUp.class);
-                startActivity(i);
+                Toast.makeText(LogIn.this, "please enter username/password", Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+        if (v.getId() == R.id.login_signupbtn)
+        {
+            Intent i = new Intent(LogIn.this,SignUp.class);
+            startActivity(i);
+        }
+
     }
+
 }

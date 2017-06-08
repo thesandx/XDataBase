@@ -13,7 +13,7 @@ public class SignUp extends AppCompatActivity {
     DataBase helper=new DataBase(this);
 
     EditText email,username,name,password1,password2;
-    Button signup,login;
+    Button signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,6 @@ public class SignUp extends AppCompatActivity {
 
 
         signup=(Button) findViewById(R.id.sign_up_btn);
-        login=(Button) findViewById(R.id.sign_up_login_btn);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,21 +38,27 @@ public class SignUp extends AppCompatActivity {
                 String pass1str = password1.getText().toString();
                 String pass2str = password2.getText().toString();
 
-                if (!pass1str.equals(pass2str)){
-                    Toast pass=Toast.makeText(SignUp.this,"password don't match",Toast.LENGTH_SHORT);
-                    pass.show();
+                if (namestr.length()>0 && emailstr.length()>0 && unamestr.length()>0 && pass1str.length()>0) {
+
+                    if (!pass1str.equals(pass2str)) {
+                        Toast pass = Toast.makeText(SignUp.this, "password don't match", Toast.LENGTH_SHORT);
+                        pass.show();
+                    } else {
+                        Contact c = new Contact();
+                        c.setName(namestr);
+                        c.setEmail(emailstr);
+                        c.setUname(unamestr);
+                        c.setPass(pass1str);
+
+                        helper.insertContact(c);
+                        Toast pass = Toast.makeText(SignUp.this, "sucessfully registered", Toast.LENGTH_SHORT);
+                        pass.show();
+
+                    }
                 }
-                else {
-                    Contact c = new Contact();
-                    c.setName(namestr);
-                    c.setEmail(emailstr);
-                    c.setUname(unamestr);
-                    c.setPass(pass1str);
-
-                    helper.insertContact(c);
-                    Toast pass=Toast.makeText(SignUp.this,"sucessfully registered",Toast.LENGTH_SHORT);
-                    pass.show();
-
+                else
+                {
+                    Toast.makeText(SignUp.this, "field cannot be left blank", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -62,15 +67,5 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i= new Intent(SignUp.this,LogIn.class);
-                startActivity(i);
-
-            }
-        });
     }
 }
