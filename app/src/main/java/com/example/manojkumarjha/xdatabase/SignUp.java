@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
                 if (namestr.length()>0 && emailstr.length()>0 && unamestr.length()>0 && pass1str.length()>0) {
 
                     if (!pass1str.equals(pass2str)) {
-                        Toast pass = Toast.makeText(SignUp.this, "password don't match", Toast.LENGTH_SHORT);
+                        Toast pass = Toast.makeText(SignUp.this, R.string.signup_pass_error, Toast.LENGTH_SHORT);
                         pass.show();
                     } else {
                         Contact c = new Contact();
@@ -51,14 +51,14 @@ public class SignUp extends AppCompatActivity {
                         c.setPass(pass1str);
 
                         helper.insertContact(c);
-                        Toast pass = Toast.makeText(SignUp.this, "sucessfully registered", Toast.LENGTH_SHORT);
+                        Toast pass = Toast.makeText(SignUp.this,R.string.signup_btn_sucess, Toast.LENGTH_SHORT);
                         pass.show();
 
                     }
                 }
                 else
                 {
-                    Toast.makeText(SignUp.this, "field cannot be left blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, R.string.signup_btn_error, Toast.LENGTH_SHORT).show();
                 }
 
 

@@ -28,14 +28,16 @@ public class DataBase extends SQLiteOpenHelper {
 
 
     //constructor
-    public DataBase(Context context){
+    public DataBase(Context context)
+    {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
         this.db=db;
+        db.execSQL(TABLE_CREATE);
+
 
     }
 
@@ -44,6 +46,7 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues values=new ContentValues();
 
         String query="select * from contacts";
+        //from above query we get to know the number of columns,so that we can assign the unique id to the nxt coloumn.
         Cursor cursor=db.rawQuery(query,null);
         int count =cursor.getCount();
 
@@ -54,6 +57,15 @@ public class DataBase extends SQLiteOpenHelper {
         values.put(COLUMN_UNAME,c.getUname());
         db.insert(TABLE_NAME,null,values);
         db.close();
+    }
+
+    public Cursor getData(){
+        db=this.getWritableDatabase();
+        String query="select * from contacts";
+        Cursor cursor=db.rawQuery(query,null);
+        System.out.println("query dal diye cursor return krne wale hai");
+        return cursor;
+
     }
 
     public String searchPass(String uname){

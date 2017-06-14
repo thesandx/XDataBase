@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">XDataBase</string>
+    <string name="signin_btn_error">invalid username/password</string>
+    <string name="signup_btn_error">All fields are mandatory.\nPlease fill the blank fields</string>
+    <string name="signup_btn_sucess">sucessfully registered</string>
+    <string name="signup_pass_error">password do not match.</string>
 </resources>
