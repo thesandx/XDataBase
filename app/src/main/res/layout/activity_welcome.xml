@@ -21,6 +21,15 @@
         android:textSize="25dp" />
     </ScrollView>
 
+    <ListView
+        android:id="@+id/dataListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#000"
+        android:dividerHeight="2dp">
+
+    </ListView>
+
    <!-- <EditText
         android:id="@+id/idTxt"
         android:layout_width="0dp"

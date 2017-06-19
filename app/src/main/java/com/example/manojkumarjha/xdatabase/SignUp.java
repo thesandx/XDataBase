@@ -1,8 +1,10 @@
 package com.example.manojkumarjha.xdatabase;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,10 +16,34 @@ public class SignUp extends AppCompatActivity {
 
     EditText email,username,name,password1,password2;
     Button signup;
+
+    @Override
+    public  boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                /**Intent homeintent = new Intent(this,LogIn.class);
+                homeintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeintent); */
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            if (getActionBar()!=null)
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }catch (NullPointerException e){
+            System.out.println("crash ho gya");
+        }
         setContentView(R.layout.activity_sign_up);
+
+
+
 
 
         signup=(Button) findViewById(R.id.sign_up_btn);

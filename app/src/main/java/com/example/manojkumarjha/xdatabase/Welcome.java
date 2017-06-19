@@ -1,17 +1,24 @@
 package com.example.manojkumarjha.xdatabase;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Welcome extends AppCompatActivity {
     DataBase helper=new DataBase(this);
@@ -22,6 +29,8 @@ public class Welcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         TextView data = (TextView)findViewById(R.id.txtview);
+        ListView listView = (ListView)findViewById(R.id.dataListView);
+        ArrayList dataItem = new ArrayList();
         Cursor res = helper.getData();
         StringBuffer stringBuffer = new StringBuffer();
         try {
@@ -37,7 +46,7 @@ public class Welcome extends AppCompatActivity {
                     System.out.println("sara data append kr liye "+i+" bar");
                     i++;
                 }
-                data.setText(stringBuffer.toString());
+               data.setText(stringBuffer.toString());
                 System.out.println("textview me settext kr diye");
                 Toast.makeText(this, "data retrived suceesfully", Toast.LENGTH_SHORT).show();
             } else {
@@ -48,6 +57,10 @@ public class Welcome extends AppCompatActivity {
             Toast.makeText(this,"error in catch",Toast.LENGTH_SHORT).show();
 
         }
+
+
+
+
 
       /*  WebView browser = (WebView)findViewById(R.id.webview);
         browser.setWebViewClient(new WebViewClient());
